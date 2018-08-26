@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -45,17 +46,9 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer"
-    };
 
     let persons = null;
-
+    let btnClass = '';
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -64,32 +57,32 @@ class App extends Component {
               name={person.name}
               age={person.age}
               click={this.deletePersonHandler.bind(this, index)}
-              key={person.id}
               change={(event) => this.nameChangeHandler(event, person.id)}
-            />)
+            />
+            )
           })}
         </div>
       );
 
-      style.backgroundColor = "red";
+      btnClass = classes.Red;
     }
 
-    const classes = [];
+    const assignClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push('red'); // classes = ['red']
+      assignClasses.push(classes.red); // assignClasses = ['red']
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold'); // classes = ['red', 'bold']
+      assignClasses.push(classes.bold); // assignClasses = ['red', 'bold']
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi I am a react app</h1>
-        <p className={classes.join(' ')}>This is a paragraph</p>
+        <p className={assignClasses.join(' ')}>This is a paragraph</p>
         <button
-          style={style}
+          className={btnClass}
           onClick={this.togglePersonsHandler}>
           Toggle Persons
           </button>
