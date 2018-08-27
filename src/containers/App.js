@@ -25,8 +25,9 @@ class App extends Component {
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(person => person.id === id);
 
+    console.log('Person index', personIndex); 
     const person = {
-      ...this.state.person[personIndex]
+      ...this.state.persons[personIndex]
     }
 
     //Alternative approach
@@ -35,7 +36,7 @@ class App extends Component {
     person.name = event.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({ persons: person });
+    this.setState({ persons: persons });
 
   };
 
@@ -60,8 +61,6 @@ class App extends Component {
       );
 
     }
-
-
 
     return (
       <div className={classes.App}>
